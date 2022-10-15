@@ -9,3 +9,12 @@ export interface Medicine {
     quantityStock?: number;
     seller?: string;
 }
+
+export interface ProductParams {
+    orderBy: string;
+    searchTerm?: string;
+    categories: string[];
+    brands: string[];
+    pageNumber: number;
+    pageSize: number;
+}

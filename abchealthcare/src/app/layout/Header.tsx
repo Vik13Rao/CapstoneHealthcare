@@ -3,6 +3,7 @@ import { AppBar, Badge, Box, IconButton, List, ListItem, Toolbar, Typography } f
 import { Link, NavLink } from "react-router-dom";
 import { useStoreContext } from "../context/StoreContext";
 import { useAppSelector } from "../store/configureStore";
+import SignedInMenu from "./SignedInMenu";
 
 
 
@@ -33,6 +34,7 @@ const navbarStyle = {
 
 export default function Header() {
     const { cart } = useAppSelector(state => state.cart);
+    const { user } = useAppSelector(state => state.account);
     const itemCount = cart?.items.reduce((sum, item) => sum + item.quantity, 0)
 
     return (
@@ -81,28 +83,35 @@ export default function Header() {
                     <Badge badgeContent={itemCount} color='secondary'>
                         <ShoppingCart />
                     </Badge>
-                </IconButton>
+                    </IconButton>
 
-                <List sx={{ display: 'flex' }}>
-                    {rLinks.map(({ title, path }) => (
-                        <ListItem
-                            component={NavLink}
-                            to={path}
-                            key={path}
-                            sx={{
-                                color: 'warning',
-                                '&:hover': {
-                                    color: 'warning.light'
-                                },
-                                '&.active': {
-                                    color: 'grey.500'
-                                },
-                                typography: 'h6', }}
-                        >
-                            {title.toUpperCase()}
-                        </ListItem>
-                    ))}
-                </List>
+                    {user ? (
+                       <SignedInMenu />
+                    ) : (
+                            <List sx={{ display: 'flex' }}>
+                                {rLinks.map(({ title, path }) => (
+                                    <ListItem
+                                        component={NavLink}
+                                        to={path}
+                                        key={path}
+                                        sx={{
+                                            color: 'warning',
+                                            '&:hover': {
+                                                color: 'warning.light'
+                                            },
+                                            '&.active': {
+                                                color: 'grey.500'
+                                            },
+                                            typography: 'h6',
+                                        }}
+                                    >
+                                        {title.toUpperCase()}
+                                    </ListItem>
+                                ))}
+                            </List> 
+                        )}
+
+                
                 </Box>
                
             </Toolbar>

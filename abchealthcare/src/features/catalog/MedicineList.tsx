@@ -10,7 +10,7 @@ export default function MedicineList({medicines }: Props) {
     return (
         <Grid container spacing={4}>
             {medicines.map(medicine => (
-                <Grid item xs={3} key={medicine.id}>
+                <Grid item xs={4} key={medicine.id}>
                     <MedicineGrid  medicine={medicine} />
                 </Grid>
                 
