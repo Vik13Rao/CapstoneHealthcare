@@ -10,6 +10,7 @@ import ProductSearch from "./ProductSearch";
 import RadioButton from "../../app/components/RadioButton";
 import CheckboxButton from "../../app/components/CheckboxButton";
 import AppPagination from "../../app/components/AppPagination";
+import useMedicines from "../../app/hooks/useMedicines";
 
 const sortOptions = [
     { value: 'name', label: 'Alphabetical' },
@@ -18,17 +19,11 @@ const sortOptions = [
 ]
 
 export default function Catalog() {
-    const medicines = useAppSelector(productSelectors.selectAll);
+    const {medicines, brands, categories, filtersLoaded,  metaData } = useMedicines();
+    
     const dispatch = useAppDispatch();
-    const {productsLoaded, status, filtersLoaded, brands, categories,productParams, metaData } = useAppSelector(state => state.catalog)
-    useEffect(() => {
-        if (!productsLoaded) dispatch(fetchProductsAsync());
-       
-    }, [productsLoaded, dispatch])
+    const {productParams } = useAppSelector(state => state.catalog)
 
-    useEffect(() => {
-        if (!filtersLoaded) dispatch(fetchFilters());
-    }, [ dispatch, filtersLoaded])
 
     if (!metaData) return <h1>Loading product</h1>
     

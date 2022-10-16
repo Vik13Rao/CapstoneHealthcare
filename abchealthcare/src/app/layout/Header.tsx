@@ -76,6 +76,26 @@ export default function Header() {
                             {title.toUpperCase()}
                         </ListItem>
                     ))}
+                    {user && user.roles?.includes('Admin') &&
+                        <ListItem
+                            component={NavLink}
+                            to={'/inventory'}
+
+                            sx={{
+                                color: 'warning',
+                                '&:hover': {
+                                    color: 'warning.light'
+                                },
+                                '&.active': {
+                                    color: 'grey.500'
+                                },
+                                typography: 'h6',
+                            }}
+                        >
+                            INVENTORY
+                        </ListItem>}
+
+                   
                 </List>
 
                 <Box display='flex' alignItems='center'>

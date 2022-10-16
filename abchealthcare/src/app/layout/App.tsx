@@ -6,6 +6,7 @@ import AboutPage from "../../features/about/AboutPage";
 import { fetchCurrentUser } from "../../features/account/accountSlice";
 import Login from "../../features/account/Login";
 import Register from "../../features/account/Register";
+import Inventory from "../../features/admin/Inventory";
 import CartPage from "../../features/cart/CartPage";
 import { fetchCartAsync, setCart } from "../../features/cart/cartSlice";
 import Catalog from "../../features/catalog/Catalog";
@@ -60,6 +61,7 @@ function App() {
               <Route path='/cart' component={CartPage} />
               <PrivateRoute path='/checkout' component={CheckoutPage} />
               <PrivateRoute path='/orders' component={Orders} />
+              <PrivateRoute roles={['Admin']} path='/inventory' component={Inventory} />
               <Route path='/login' component={Login} />
               <Route path='/register' component={Register} />
 
